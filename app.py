@@ -211,4 +211,4 @@ def get_wind_data(day):
 if __name__ == '__main__':
     os.makedirs('static', exist_ok=True)
     os.makedirs('templates', exist_ok=True)
-    app.run(host='0.0.0.0', port=7782, debug=True)
+    app.run(host='0.0.0.0', port=6005, debug=True)
