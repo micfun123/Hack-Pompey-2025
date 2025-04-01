@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Air Quality Plume Visualization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Air Quality Plume Visualization</h1>
+        <div class="controls">
+            <label for="dayNumber">Enter Day Number:</label>
+            <input type="number" id="dayNumber" name="dayNumber" min="0" value="{{ default_day }}">
+            <button onclick="loadPlumeImage()">Show Plume</button>
+            
+            <label for="pmType">PM Type:</label>
+            <select id="pmType">
+                <option value="PM1">PM1</option>
+                <option value="PM10">PM10</option>
+                <option value="PM25" selected>PM2.5</option>
+            </select>
+        </div>
+        <div class="data">
+            <p id = "wind_speed">Wind Speed {{wind_speed}}</p>
+            <p  id = "wind_dir">Wind Direction {{wind_dir}}</p>
+        </div>
+        <div class="loading" id="loadingIndicator">Generating plume visualization...</div>
+        <img id="plumeImage" src="{{ initial_image }}" alt="Plume Visualization" style="height: 25em;">
+    </div>
+
+    <script>
+        function loadPlumeImage() {
+            const dayNumber = document.getElementById('dayNumber').value;
+            const pmType = document.getElementById('pmType').value;
+            const imgElement = document.getElementById('plumeImage');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const windSpeed = document.getElementById('wind_speed');
+            const windDir = document.getElementById('wind_dir');
+
+            // Show loading indicator
+            loadingIndicator.style.display = 'block';
+            imgElement.style.display = 'none';
+
+            // Fetch updated wind data
+            fetch(`/wind_data/${dayNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    windSpeed.innerHTML = `Wind Speed: ${data.wind_speed} m/s`;
+                    windDir.innerHTML = `Wind Direction: ${data.wind_dir} degrees`;
+                })
+                .catch(error => console.error("Error fetching wind data:", error));
+            
+            // Load new image
+            imgElement.onload = function() {
+                loadingIndicator.style.display = 'none';
+                imgElement.style.display = 'block';
+            };
+            imgElement.src = `/plume_overlay/${dayNumber}/${pmType}?${new Date().getTime()}`;
+        }
+
+    </script>
+</body>
+</html>

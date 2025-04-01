@@ -1,0 +1,20 @@
+#map-container {
+    position: relative;
+    z-index: 1;
+}
+
+#map {
+    position: absolute;
+    z-index: 1;
+    height: 20rem;
+}
+
+#heatmap {
+    position: absolute;
+    height: 20rem;
+    z-index: 2;
+}
+
+button {
+    position: fixed;
+}

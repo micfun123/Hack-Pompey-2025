@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <link rel="stylesheet" href="stylesheet.css">
+        <script defer src="index.js"></script>
+        <title>Ahoy World!</title>
+    </head>
+
+    <body>
+        <h1>Particulate Diffusion</h1>
+        <p>Diffusion of carbon and particle emmissions from the international port across Portsmouth</p>
+
+        <div id="map-container">
+            <img src="map.png" alt="Map of Portsmouth" id="map">
+            <img src="gaussian_plume.png" id="heatmap" alt="Heatmap of Portsmouth">  
+            <button>previous day</button>
+            <button>next day</button>
+        </div>
+        
+    </body>
+</html>
